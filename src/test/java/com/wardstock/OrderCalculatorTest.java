@@ -58,7 +58,7 @@ class OrderCalculatorTest {
 
     @Test
     void roundsToWholePacks() {
-        assertEquals(200, OrderCalculator.roundToPacks(200, 100));
+        assertEquals(200, OrderCalculator.roundToPacks(190, 100));
         assertEquals(30, OrderCalculator.roundToPacks(30, 10));
     }
 

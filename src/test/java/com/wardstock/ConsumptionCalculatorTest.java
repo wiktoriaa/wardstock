@@ -43,13 +43,23 @@ class ConsumptionCalculatorTest {
     }
 
     @Test
-    void usesConsumptionAsReported() {
+    void adjustsConsumptionForStockOutDays() {
         List<StockReport> history = List.of(
                 report("2026-01", 60, 0),
                 report("2026-02", 54, 0),
                 report("2026-03", 30, 15));
 
-        assertEquals(48, calculator.averageMonthlyConsumption(history, YearMonth.parse("2026-03")).getAsLong());
+        assertEquals(58, calculator.averageMonthlyConsumption(history, YearMonth.parse("2026-03")).getAsLong());
+    }
+
+    @Test
+    void ignoresPeriodWithMoreThanTwentyStockOutDays() {
+        List<StockReport> history = List.of(
+                report("2026-01", 60, 0),
+                report("2026-02", 54, 0),
+                report("2026-03", 5, 21));
+
+        assertEquals(57, calculator.averageMonthlyConsumption(history, YearMonth.parse("2026-03")).getAsLong());
     }
 
     @Test
