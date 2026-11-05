@@ -44,6 +44,6 @@ public class OrderCalculator {
     }
 
     static long roundToPacks(long quantity, int packSize) {
-        return (quantity / packSize) * packSize;
+        return ((quantity + packSize - 1) / packSize) * packSize;
     }
 }
